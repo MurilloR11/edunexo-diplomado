@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 48" role="img" aria-label="Edunexo">
+
+  <!-- Acento decorativo izquierdo -->
+  <rect x="0" y="4" width="3" height="32" rx="2" fill="#0d9488"/>
+
+  <!-- Edu (liviano) -->
+  <text x="12" y="30"
+    font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+    font-size="28"
+    font-weight="300"
+    letter-spacing="-0.5"
+    fill="#f1f5f9">Edu</text>
+
+  <!-- nexo (negrita) -->
+  <text x="67" y="30"
+    font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+    font-size="28"
+    font-weight="800"
+    letter-spacing="-0.5"
+    fill="#f1f5f9">nexo</text>
+
+  <!-- Subtítulo -->
+  <text x="13" y="43"
+    font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+    font-size="7.5"
+    font-weight="600"
+    letter-spacing="2.8"
+    fill="#0d9488">GESTIÓN ACADÉMICA</text>
+
+</svg>
