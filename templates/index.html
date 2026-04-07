@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edunexo</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='index.css')}}">
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <nav class="nav">
+          <div class="nav__logo">
+            <img
+              src="{{url_for('static', filename='adunexo.logo.svg')}}"
+              alt="Logo de Edunexo"
+              class="nav__logo-img"
+            />
+          </div>
+          <ul class="nav__list">
+            <li class="nav__item"><a href="#" class="nav__link">Nosotros</a></li>
+            <li class="nav__item"><a href="#" class="nav__link">Misión y visión</a></li>
+            <li class="nav__item"><a href="#" class="nav__link">Objetivos</a></li>
+            <li class="nav__item"><a href="#" class="nav__link">Tecnologías</a></li>
+          </ul>
+          <a href="#" class="nav__cta">Registrate</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="main">
+
+      <!-- HERO -->
+      <section class="hero">
+
+        <!-- Decoración de fondo -->
+        <div class="hero__glow hero__glow--1"></div>
+        <div class="hero__glow hero__glow--2"></div>
+        <div class="hero__grid-bg"></div>
+
+        <div class="container">
+          <div class="hero__layout">
+
+            <!-- Texto izquierda -->
+            <div class="hero__text">
+
+              <div class="hero__badge">
+                <span class="hero__badge-dot"></span>
+                Plataforma académica integral
+              </div>
+
+              <h1 class="hero__title">
+                Gestiona tu colegio<br>
+                <span class="hero__title--accent">de forma inteligente</span>
+              </h1>
+
+              <p class="hero__subtitle">
+                Conecta docentes, estudiantes y acudientes en un solo lugar.
+                Notas, tareas, boletines y seguimiento académico completo.
+              </p>
+
+              <div class="hero__actions">
+                <a href="#" class="btn btn--primary">
+                  Comenzar ahora
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <a href="#" class="btn btn--ghost">Ver cómo funciona</a>
+              </div>
+
+              <!-- Stats -->
+              <div class="hero__stats">
+                <div class="hero__stat">
+                  <span class="hero__stat-number">500<span class="hero__stat-plus">+</span></span>
+                  <span class="hero__stat-label">Colegios</span>
+                </div>
+                <div class="hero__stat-divider"></div>
+                <div class="hero__stat">
+                  <span class="hero__stat-number">20K<span class="hero__stat-plus">+</span></span>
+                  <span class="hero__stat-label">Estudiantes</span>
+                </div>
+                <div class="hero__stat-divider"></div>
+                <div class="hero__stat">
+                  <span class="hero__stat-number">4</span>
+                  <span class="hero__stat-label">Roles integrados</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Imagen derecha -->
+            <div class="hero__visual">
+
+              <div class="hero__image-wrap">
+                <img
+                  src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=700&auto=format&fit=crop&q=80"
+                  alt="Estudiantes en el colegio"
+                  class="hero__image"
+                />
+                <!-- Overlay gradient bottom -->
+                <div class="hero__image-overlay"></div>
+              </div>
+
+              <!-- Tarjeta flotante: tarea entregada -->
+              <div class="hero__card hero__card--task">
+                <div class="hero__card-icon hero__card-icon--green">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <div class="hero__card-body">
+                  <p class="hero__card-title">Tarea entregada</p>
+                  <p class="hero__card-sub">Matemáticas · Grado 9°</p>
+                </div>
+              </div>
+
+              <!-- Tarjeta flotante: nota -->
+              <div class="hero__card hero__card--grade">
+                <div class="hero__card-grade">4.8</div>
+                <div class="hero__card-body">
+                  <p class="hero__card-title">Promedio general</p>
+                  <p class="hero__card-sub">Período 2 · 2025</p>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- NOSOTROS -->
+      <section class="about" id="nosotros">
+        <div class="container">
+          <div class="about__layout">
+
+            <!-- Imagen izquierda -->
+            <div class="about__visual">
+              <div class="about__image-bg"></div>
+              <div class="about__image-wrap">
+                <img
+                  src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&auto=format&fit=crop&q=80"
+                  alt="Docente en el colegio"
+                  class="about__image"
+                />
+              </div>
+              <!-- Badge flotante -->
+              <div class="about__floating-badge">
+                <span class="about__floating-number">+10</span>
+                <span class="about__floating-text">años de experiencia<br>en educación</span>
+              </div>
+            </div>
+
+            <!-- Contenido derecha -->
+            <div class="about__content">
+
+              <div class="about__label">
+                <span class="about__label-line"></span>
+                Nosotros
+              </div>
+
+              <h2 class="about__title">
+                La plataforma que tu<br>
+                <span class="about__title--accent">colegio necesitaba</span>
+              </h2>
+
+              <p class="about__subtitle">
+                Diseñamos Edunexo para transformar la gestión académica de colegios y escuelas,
+                conectando cada rol en un solo ecosistema digital seguro y eficiente.
+              </p>
+
+              <!-- Cards de características -->
+              <div class="about__cards">
+
+                <div class="about__card">
+                  <div class="about__card-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+                  </div>
+                  <div>
+                    <h4 class="about__card-title">Gestión de notas</h4>
+                    <p class="about__card-desc">Registra y consulta calificaciones en tiempo real por materia y período.</p>
+                  </div>
+                </div>
+
+                <div class="about__card">
+                  <div class="about__card-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  </div>
+                  <div>
+                    <h4 class="about__card-title">Seguimiento de tareas</h4>
+                    <p class="about__card-desc">Publica, entrega y rastrea tareas por materia, grado y fecha límite.</p>
+                  </div>
+                </div>
+
+                <div class="about__card">
+                  <div class="about__card-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                  </div>
+                  <div>
+                    <h4 class="about__card-title">Tres roles integrados</h4>
+                    <p class="about__card-desc">Docentes, estudiantes y acudientes con paneles personalizados.</p>
+                  </div>
+                </div>
+
+                <div class="about__card">
+                  <div class="about__card-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                  </div>
+                  <div>
+                    <h4 class="about__card-title">Documentos digitales</h4>
+                    <p class="about__card-desc">Boletines, certificados y menciones de honor disponibles al instante.</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- MISIÓN & VISIÓN -->
+      <section class="mv" id="mision">
+        <div class="container">
+
+          <!-- Header -->
+          <div class="mv__header">
+            <div class="mv__label">
+              <span class="mv__label-line"></span>
+              Misión &amp; Visión
+              <span class="mv__label-line"></span>
+            </div>
+            <h2 class="mv__title">Por qué existimos y<br><span class="mv__title--accent">hacia dónde vamos</span></h2>
+            <p class="mv__subtitle">Cada decisión que tomamos tiene un propósito claro: mejorar la educación en colegios y escuelas de habla hispana.</p>
+          </div>
+
+          <!-- Cards -->
+          <div class="mv__grid">
+
+            <!-- Misión -->
+            <div class="mv__card">
+              <div class="mv__card-glow"></div>
+              <div class="mv__card-number">01</div>
+
+              <div class="mv__card-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+                </svg>
+              </div>
+
+              <div class="mv__card-tag">Misión</div>
+              <h3 class="mv__card-title">Transformar la gestión académica con tecnología de impacto real</h3>
+              <p class="mv__card-text">Facilitamos el trabajo de docentes y directivos poniendo a disposición de cada institución herramientas digitales que simplifican procesos, mejoran la comunicación y potencian el aprendizaje.</p>
+
+              <ul class="mv__card-list">
+                <li>
+                  <span class="mv__check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  Digitalización de procesos académicos
+                </li>
+                <li>
+                  <span class="mv__check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  Comunicación fluida entre docentes, estudiantes y acudientes
+                </li>
+                <li>
+                  <span class="mv__check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  Datos en tiempo real para mejores decisiones institucionales
+                </li>
+              </ul>
+
+              <div class="mv__card-footer">
+                <span class="mv__card-stat">500<span>+</span> colegios</span>
+                <span class="mv__card-stat-div"></span>
+                <span class="mv__card-stat">20K<span>+</span> estudiantes activos</span>
+              </div>
+            </div>
+
+            <!-- Visión -->
+            <div class="mv__card mv__card--vision">
+              <div class="mv__card-glow mv__card-glow--vision"></div>
+              <div class="mv__card-number">02</div>
+
+              <div class="mv__card-icon mv__card-icon--vision">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+                </svg>
+              </div>
+
+              <div class="mv__card-tag mv__card-tag--vision">Visión</div>
+              <h3 class="mv__card-title">Ser el ecosistema educativo digital de referencia en Latinoamérica</h3>
+              <p class="mv__card-text">Imaginamos un futuro donde cada institución, sin importar su tamaño o recursos, tenga acceso a una plataforma robusta, segura y fácil de usar que impulse el éxito académico.</p>
+
+              <ul class="mv__card-list">
+                <li>
+                  <span class="mv__check mv__check--vision"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  Cobertura en todos los niveles de educación formal
+                </li>
+                <li>
+                  <span class="mv__check mv__check--vision"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  Accesible para instituciones grandes y pequeñas por igual
+                </li>
+                <li>
+                  <span class="mv__check mv__check--vision"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  Referente en innovación y tecnología educativa regional
+                </li>
+              </ul>
+
+              <div class="mv__card-footer">
+                <span class="mv__card-stat mv__card-stat--vision">2035 <span>meta</span></span>
+                <span class="mv__card-stat-div mv__card-stat-div--vision"></span>
+                <span class="mv__card-stat mv__card-stat--vision">Latam <span>alcance</span></span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- OBJETIVOS -->
+      <section class="obj" id="objetivos">
+        <div class="container">
+
+          <div class="obj__header">
+            <div class="obj__label">
+              <span class="obj__label-line"></span>
+              Objetivos
+              <span class="obj__label-line"></span>
+            </div>
+            <h2 class="obj__title">Lo que nos <span class="obj__title--accent">proponemos lograr</span></h2>
+          </div>
+
+          <!-- Objetivo General -->
+          <div class="obj__general">
+            <div class="obj__general-glow"></div>
+            <div class="obj__general-content">
+              <div class="obj__general-tag">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                Objetivo General
+              </div>
+              <h3 class="obj__general-title">Desarrollar una plataforma integral que transforme la gestión educativa en Colombia</h3>
+              <p class="obj__general-text">Crear un ecosistema digital seguro y accesible que unifique todos los procesos académicos y administrativos de colegios y escuelas, conectando a docentes, estudiantes y acudientes en tiempo real, desde cualquier dispositivo.</p>
+            </div>
+            <div class="obj__general-deco" aria-hidden="true">
+              <svg class="obj__deco-svg" viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle class="obj__deco-spin" cx="130" cy="130" r="118" stroke="rgba(13,148,136,0.18)" stroke-width="1" stroke-dasharray="6 9"/>
+                <circle cx="130" cy="130" r="90" stroke="rgba(13,148,136,0.22)" stroke-width="1"/>
+                <circle cx="130" cy="130" r="62" stroke="rgba(13,148,136,0.38)" stroke-width="1.5" fill="rgba(13,148,136,0.04)"/>
+                <line x1="130" y1="8" x2="130" y2="252" stroke="rgba(13,148,136,0.1)" stroke-width="1"/>
+                <line x1="8" y1="130" x2="252" y2="130" stroke="rgba(13,148,136,0.1)" stroke-width="1"/>
+                <circle cx="130" cy="130" r="16" fill="rgba(13,148,136,0.12)" stroke="rgba(13,148,136,0.5)" stroke-width="1.5"/>
+                <circle cx="130" cy="130" r="5" fill="#0d9488"/>
+                <circle cx="130" cy="12" r="4" fill="#0d9488" opacity="0.8"/>
+                <circle cx="248" cy="130" r="4" fill="#2dd4bf" opacity="0.45"/>
+                <circle cx="130" cy="248" r="4" fill="#0d9488" opacity="0.2"/>
+                <circle cx="12" cy="130" r="4" fill="#2dd4bf" opacity="0.45"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Separador -->
+          <div class="obj__sep">
+            <span class="obj__sep-line"></span>
+            <span class="obj__sep-label">Objetivos Específicos</span>
+            <span class="obj__sep-line"></span>
+          </div>
+
+          <!-- Objetivos específicos: cards -->
+          <div class="obj__cards">
+
+            <div class="obj__card">
+              <div class="obj__card-num">01</div>
+              <div class="obj__card-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </div>
+              <h4 class="obj__card-title">Centralizar la información académica</h4>
+              <p class="obj__card-text">Unificar calificaciones, tareas y asistencia en una sola plataforma accesible desde cualquier dispositivo y momento.</p>
+            </div>
+
+            <div class="obj__card">
+              <div class="obj__card-num">02</div>
+              <div class="obj__card-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+              </div>
+              <h4 class="obj__card-title">Potenciar la comunicación institucional</h4>
+              <p class="obj__card-text">Facilitar la comunicación con notificaciones automáticas y reportes instantáneos entre todos los roles.</p>
+            </div>
+
+            <div class="obj__card">
+              <div class="obj__card-num">03</div>
+              <div class="obj__card-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 11 17 15 13"/></svg>
+              </div>
+              <h4 class="obj__card-title">Automatizar documentos académicos</h4>
+              <p class="obj__card-text">Generar boletines, certificados y menciones de honor de forma automática, reduciendo errores y tiempos.</p>
+            </div>
+
+            <div class="obj__card">
+              <div class="obj__card-num">04</div>
+              <div class="obj__card-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <h4 class="obj__card-title">Garantizar seguridad y privacidad de datos</h4>
+              <p class="obj__card-text">Proteger información sensible con acceso por roles, cifrado de datos y auditorías de actividad.</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- TECNOLOGÍAS -->
+      <section class="tech" id="tecnologias">
+        <div class="container">
+
+          <div class="tech__header">
+            <div class="tech__label">
+              <span class="tech__label-line"></span>
+              Tecnologías
+              <span class="tech__label-line"></span>
+            </div>
+            <h2 class="tech__title">Stack que <span class="tech__title--accent">impulsa Edunexo</span></h2>
+            <p class="tech__subtitle">Herramientas modernas, probadas y pensadas para escalar con la plataforma.</p>
+          </div>
+
+          <div class="tech__grid">
+
+            <!-- Flask -->
+            <div class="tech__card">
+              <div class="tech__card-icon tech__card-icon--flask">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-4.5 9a1 1 0 00.9 1.5h11.2a1 1 0 00.9-1.5L14 9V3"/><line x1="6.5" y1="14" x2="17.5" y2="14"/></svg>
+              </div>
+              <div class="tech__card-body">
+                <div class="tech__card-tag">Frontend · Backend</div>
+                <h3 class="tech__card-name">Flask</h3>
+                <p class="tech__card-desc">Microframework de Python que gestiona el servidor, las rutas y el renderizado de plantillas con Jinja2.</p>
+              </div>
+            </div>
+
+            <!-- MySQL -->
+            <div class="tech__card tech__card--db">
+              <div class="tech__card-icon tech__card-icon--mysql">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/></svg>
+              </div>
+              <div class="tech__card-body">
+                <div class="tech__card-tag">Base de datos</div>
+                <h3 class="tech__card-name">MySQL</h3>
+                <p class="tech__card-desc">Motor relacional que almacena usuarios, calificaciones, tareas y toda la información académica de forma estructurada.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__inner">
+
+          <!-- Logo + tagline -->
+          <div class="footer__brand">
+            <img src="{{url_for('static', filename='adunexo.logo.svg')}}" alt="Edunexo" class="footer__logo" />
+            <p class="footer__tagline">Conectando colegios, docentes, estudiantes y acudientes en un solo lugar.</p>
+          </div>
+
+          <!-- Links -->
+          <nav class="footer__nav">
+            <span class="footer__nav-title">Plataforma</span>
+            <a href="#nosotros" class="footer__nav-link">Nosotros</a>
+            <a href="#mision" class="footer__nav-link">Misión y visión</a>
+            <a href="#objetivos" class="footer__nav-link">Objetivos</a>
+            <a href="#tecnologias" class="footer__nav-link">Tecnologías</a>
+          </nav>
+
+        </div>
+
+        <div class="footer__bottom">
+          <span>&copy; 2026 Edunexo. Todos los derechos reservados.</span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
