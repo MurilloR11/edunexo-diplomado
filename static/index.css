@@ -1273,6 +1273,24 @@ img {
     margin: 0 auto;
 }
 
+.tech__group {
+    margin-top: 44px;
+}
+
+.tech__group-title {
+    font-family: inherit;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #f1f5f9;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.tech__card--languages {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
 .tech__card {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -1310,6 +1328,33 @@ img {
 .tech__card-icon--mysql {
     background: rgba(59, 130, 246, 0.12);
     color: #60a5fa;
+}
+
+.tech__lang-grid {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 14px;
+}
+
+.tech__lang-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    background: rgba(15, 23, 42, 0.4);
+    color: #e2e8f0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: inherit;
+}
+
+.tech__lang-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
 }
 
 .tech__card-tag {
