@@ -17,6 +17,7 @@ La homepage está orientada a mostrar el producto, su impacto y su enfoque tecno
 ## Tecnologías y librerías
 
 - **Python + Flask** (servidor web y render de plantilla)
+- **GPT4All** (asistente IA local con modelo Llama 3)
 - **HTML5 + CSS3**
 - **JavaScript vanilla** (sin frameworks)
 - **Google Fonts**:
@@ -86,20 +87,24 @@ En móvil se simplifica la experiencia visual para evitar saturación (por ejemp
 ```text
 edunexo-diplomado/
 ├── app.py
+├── requirements.txt
 ├── templates/
-│   └── index.html
-└── static/
-    ├── index.css
-    └── adunexo.logo.svg
+│   ├── index.html
+│   └── chat.html
+├── static/
+│   ├── index.css
+│   ├── css/chat.css
+│   └── adunexo.logo.svg
+└── .gitignore
 ```
 
 ## Cómo ejecutar el proyecto
 
 1. Crear y activar entorno virtual (opcional pero recomendado).
-2. Instalar Flask:
+2. Instalar dependencias:
 
 ```bash
-pip install flask
+pip install -r requirements.txt
 ```
 
 3. Ejecutar la app:
@@ -116,11 +121,12 @@ http://127.0.0.1:5000
 
 ## Estado actual
 
-Proyecto enfocado en la **homepage institucional** con UI moderna, responsive y animaciones de navegación.
+Landing page institucional con UI moderna, responsive y animaciones. Vista de chat con integración a GPT4All para asistencia IA local.
 
-## Vista de chat
+## Asistente IA
 
-La vista del asistente ahora es **solo visual** (sin lógica de conversación activa).
+Chat conectado a GPT4All con modelo **Meta-Llama-3-8B-Instruct.Q4_0.gguf**.
 
 - Ruta directa: `http://127.0.0.1:5000/chat`
-- Alias con redirección: `http://127.0.0.1:5000/ai` (también `/AI`)
+- Alias: `http://127.0.0.1:5000/ai` (también `/AI`)
+- Endpoint API: `POST /api/chat`
