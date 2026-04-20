@@ -52,7 +52,7 @@
               <button class="ai-chat__submit" id="chat-submit" type="submit">Enviar</button>
             </form>
 
-            <p class="ai-chat__status" id="chat-status" role="status" aria-live="polite">Modo visual con respuestas estaticas.</p>
+            <p class="ai-chat__status" id="chat-status" role="status" aria-live="polite"></p>
           </div>
         </div>
       </section>
@@ -60,19 +60,13 @@
 
     <script>
       (function () {
-        const chatRoot = document.querySelector("[data-ai-chat-static]");
-        if (!chatRoot) return;
-
-        const form = chatRoot.querySelector("#chat-form");
-        const input = chatRoot.querySelector("#chat-input");
-        const messages = chatRoot.querySelector("#chat-messages");
-        const status = chatRoot.querySelector("#chat-status");
-        const promptButtons = chatRoot.querySelectorAll(".ai-chat__prompt");
+        const form = document.querySelector("#chat-form");
+        const input = document.querySelector("#chat-input");
+        const messages = document.querySelector("#chat-messages");
+        const status = document.querySelector("#chat-status");
+        const promptButtons = document.querySelectorAll(".ai-chat__prompt");
 
         if (!form || !input || !messages || !status) return;
-
-        const staticReply =
-          "Respuesta estatica de demo: esta vista es solo visual y no consulta ningun servicio de IA.";
 
         const autoResize = () => {
           input.style.height = "auto";
@@ -97,19 +91,38 @@
           messages.scrollTop = messages.scrollHeight;
         };
 
+        const sendMessage = async (text) => {
+          addMessage("user", text);
+          input.value = "";
+          autoResize();
+          status.textContent = "Esperando respuesta...";
+
+          try {
+            const response = await fetch("/api/chat", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ message: text })
+            });
+
+            const data = await response.json();
+
+            if (data.error) {
+              status.textContent = "Error: " + data.error;
+              return;
+            }
+
+            addMessage("assistant", data.response);
+            status.textContent = "";
+          } catch (err) {
+            status.textContent = "Error de conexion: " + err.message;
+          }
+        };
+
         form.addEventListener("submit", (event) => {
           event.preventDefault();
           const text = input.value.trim();
-          if (!text) {
-            status.textContent = "Escribe un mensaje para mostrarlo en el chat.";
-            return;
-          }
-
-          addMessage("user", text);
-          addMessage("assistant", staticReply);
-          input.value = "";
-          input.focus();
-          status.textContent = "Mensaje agregado con respuesta estatica.";
+          if (!text) return;
+          sendMessage(text);
         });
 
         input.addEventListener("input", autoResize);
@@ -124,9 +137,7 @@
           button.addEventListener("click", () => {
             const prompt = button.getAttribute("data-prompt");
             if (!prompt) return;
-            input.value = prompt;
-            autoResize();
-            input.focus();
+            sendMessage(prompt);
           });
         });
       })();
