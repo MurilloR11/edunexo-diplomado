@@ -1,3 +1,7 @@
+# Archivos de Claude Code
+.claude/
+CLAUDE.md
+
 # Entorno virtual
 venv/
 
