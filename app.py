@@ -5,22 +5,25 @@ app = Flask(__name__)
 
 _model = None
 
+SYSTEM_PROMPT = (
+    "Eres un asistente virtual de la plataforma educativa Edunexo. "
+    "Solo respondes en español, de forma breve (máximo 2 o 3 oraciones). "
+    "No saludes ni te presentes al inicio. Simplemente responde la pregunta del usuario "
+    "sin generar preguntas adicionales ni ejemplos de conversación."
+)
+
 def get_model():
     global _model
     if _model is None:
         _model = GPT4All("Meta-Llama-3-8B-Instruct.Q4_0.gguf")
     return _model
 
+
 def generate_response(message, max_tokens=256):
     model = get_model()
-    prompt = (
-        "Eres un asistente virtual de la plataforma educativa Edunexo. "
-        "Solo respondes en español, de forma breve (maximo 2 o 3 oraciones). "
-        "No saludes ni te presentes, simplemente responde la pregunta.\n\n"
-        f"PREGUNTA: {message}\n"
-        "RESPUESTA:"
-    )
-    return model.generate(prompt, max_tokens=max_tokens)
+    with model.chat_session(system_prompt=SYSTEM_PROMPT):
+        response = model.generate(message, max_tokens=max_tokens)
+    return response
 
 
 @app.route("/")
