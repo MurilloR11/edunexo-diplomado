@@ -1,7 +1,7 @@
-# Edunexo - Landing Page Institucional
+# Edunexo - Landing + Asistente IA
 
-Landing page desarrollada con **Flask** para presentar la plataforma académica **Edunexo**.  
-El sitio comunica propuesta de valor, misión/visión, objetivos y stack tecnológico, con diseño moderno, animaciones y comportamiento responsivo.
+Aplicación web desarrollada con **Flask** para presentar la plataforma académica **Edunexo** e integrar un **chat con GPT4All**.  
+El sitio comunica propuesta de valor, misión/visión, objetivos y stack tecnológico, y además incluye una vista de asistencia IA con respuestas en tiempo real.
 
 ## ¿Qué trata el proyecto?
 
@@ -12,7 +12,7 @@ Edunexo es una propuesta de plataforma para gestión educativa que conecta:
 - Acudientes
 - Administradores
 
-La homepage está orientada a mostrar el producto, su impacto y su enfoque tecnológico.
+La solución está orientada a mostrar el producto, su impacto, su enfoque tecnológico y brindar soporte conversacional con IA local.
 
 ## Tecnologías y librerías
 
@@ -25,7 +25,7 @@ La homepage está orientada a mostrar el producto, su impacto y su enfoque tecno
   - Roboto
   - Syne
 
-## Componentes principales de la homepage
+## Componentes principales
 
 1. **Header/Navbar**
    - Logo clickeable al inicio
@@ -51,9 +51,15 @@ La homepage está orientada a mostrar el producto, su impacto y su enfoque tecno
    - Objetivos específicos en cards
 
 6. **Tecnologías**
-   - Cards de Flask y MySQL
+   - Card unificada con tecnologías y lenguajes
+   - Logos de stack (Devicon SVG)
 
-7. **Footer**
+7. **Asistente IA**
+   - Vista de chat en `/chat`, `/ai` y `/AI`
+   - Integración frontend con `POST /api/chat`
+   - Respuesta generada con GPT4All (modelo Llama 3)
+
+8. **Footer**
    - Marca
    - Redes sociales
    - Enlaces de navegación/roles/legal
@@ -80,7 +86,8 @@ En móvil se simplifica la experiencia visual para evitar saturación (por ejemp
 
 - **Logo**: archivo local `static/adunexo.logo.svg`
 - **Imágenes de contenido**: URLs remotas de **Unsplash** (`images.unsplash.com`)
-- **Iconos**: SVG inline dentro de la plantilla (sin librería externa de iconos)
+- **Iconos generales**: SVG inline dentro de la plantilla
+- **Logos de tecnologías/lenguajes**: SVG remotos de **Devicon** (CDN jsdelivr)
 
 ## Estructura del proyecto
 
@@ -119,10 +126,6 @@ python app.py
 http://127.0.0.1:5000
 ```
 
-## Estado actual
-
-Landing page institucional con UI moderna, responsive y animaciones. Vista de chat con integración a GPT4All para asistencia IA local.
-
 ## Asistente IA
 
 Chat conectado a GPT4All con modelo **Meta-Llama-3-8B-Instruct.Q4_0.gguf**.
@@ -130,3 +133,17 @@ Chat conectado a GPT4All con modelo **Meta-Llama-3-8B-Instruct.Q4_0.gguf**.
 - Ruta directa: `http://127.0.0.1:5000/chat`
 - Alias: `http://127.0.0.1:5000/ai` (también `/AI`)
 - Endpoint API: `POST /api/chat`
+- Prompt de sistema: respuestas en español, breves y enfocadas en contexto educativo
+- Longitud máxima de entrada en UI: `500` caracteres
+
+Ejemplo de consumo del endpoint:
+
+```bash
+curl -X POST http://127.0.0.1:5000/api/chat \
+  -H "Content-Type: application/json" \
+  -d "{\"message\":\"Como mejorar el seguimiento de asistencia?\"}"
+```
+
+## Estado actual
+
+Landing institucional moderna + módulo de chat IA funcional con GPT4All para asistencia local en tiempo real.
