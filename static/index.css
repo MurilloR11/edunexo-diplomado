@@ -1,5 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Syne:wght@400..800&display=swap');
 
+:root {
+    --color-bg-primary: #0f172a;
+    --color-bg-secondary: #080e1a;
+    --color-text-primary: #f1f5f9;
+    --color-text-muted: #94a3b8;
+    --color-text-subtle: #64748b;
+    --color-brand: #0d9488;
+    --color-brand-strong: #0f766e;
+    --color-brand-soft: #2dd4bf;
+    --surface-border-soft: rgba(148, 163, 184, 0.18);
+    --surface-panel: rgba(15, 23, 42, 0.85);
+    --surface-panel-strong: rgba(2, 6, 23, 0.86);
+    --shadow-brand: 0 16px 40px rgba(13, 148, 136, 0.18);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -12,8 +27,8 @@ html {
 
 body {
     font-family: "Montserrat", sans-serif;
-    background-color: #0f172a;
-    color: #f1f5f9;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
     overflow-x: hidden;
 }
 
@@ -1542,6 +1557,7 @@ img {
     .about__layout {
         gap: 40px;
     }
+
 }
 
 @media (max-width: 1024px) {
@@ -1623,6 +1639,7 @@ img {
     .obj__cards {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
 }
 
 @media (max-width: 900px) {

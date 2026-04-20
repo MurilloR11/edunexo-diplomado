@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edunexo · Asistente IA</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='index.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/chat.css')}}">
+  </head>
+  <body>
+    <main class="main">
+      <section class="ai-chat" id="asistente" aria-labelledby="ai-chat-title">
+        <div class="container">
+          <div class="ai-chat__panel" data-ai-chat-static>
+            <div class="ai-chat__panel-head">
+              <div class="ai-chat__bot-chip">Asistente IA</div>
+              <h1 class="ai-chat__title" id="ai-chat-title">Chat de Edunexo</h1>
+              <p class="ai-chat__subtitle">Vista visual con mensajes de prueba y respuesta estatica.</p>
+            </div>
+
+            <div class="ai-chat__messages" id="chat-messages" role="log" aria-live="polite" aria-relevant="additions text" aria-label="Vista visual del historial de conversacion con asistente IA">
+              <article class="ai-chat__message ai-chat__message--assistant">
+                <div class="ai-chat__avatar" aria-hidden="true">AI</div>
+                <p class="ai-chat__bubble">Hola, soy tu asistente de Edunexo. Preguntame sobre notas, tareas, asistencia o comunicacion con acudientes.</p>
+              </article>
+              <article class="ai-chat__message ai-chat__message--user">
+                <div class="ai-chat__avatar" aria-hidden="true">Tu</div>
+                <p class="ai-chat__bubble">Como puedo automatizar los boletines por periodo?</p>
+              </article>
+              <article class="ai-chat__message ai-chat__message--assistant">
+                <div class="ai-chat__avatar" aria-hidden="true">AI</div>
+                <p class="ai-chat__bubble">Puedes centralizar calificaciones por periodo, publicar retroalimentacion docente y generar boletines automaticos para estudiantes y acudientes.</p>
+              </article>
+            </div>
+
+            <div class="ai-chat__quick-prompts" aria-label="Preguntas sugeridas">
+              <button type="button" class="ai-chat__prompt" data-prompt="Como puedo automatizar boletines por periodo?">Boletines automaticos</button>
+              <button type="button" class="ai-chat__prompt" data-prompt="Que beneficios tiene centralizar las tareas?">Gestion de tareas</button>
+              <button type="button" class="ai-chat__prompt" data-prompt="Como se maneja la asistencia en tiempo real?">Control de asistencia</button>
+            </div>
+
+            <form class="ai-chat__form" id="chat-form">
+              <label class="u-sr-only" for="chat-input">Vista visual del campo de texto del asistente IA</label>
+              <textarea
+                id="chat-input"
+                class="ai-chat__input"
+                name="message"
+                rows="1"
+                maxlength="500"
+                placeholder="Escribe un mensaje"
+              ></textarea>
+              <button class="ai-chat__submit" id="chat-submit" type="submit">Enviar</button>
+            </form>
+
+            <p class="ai-chat__status" id="chat-status" role="status" aria-live="polite">Modo visual con respuestas estaticas.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      (function () {
+        const chatRoot = document.querySelector("[data-ai-chat-static]");
+        if (!chatRoot) return;
+
+        const form = chatRoot.querySelector("#chat-form");
+        const input = chatRoot.querySelector("#chat-input");
+        const messages = chatRoot.querySelector("#chat-messages");
+        const status = chatRoot.querySelector("#chat-status");
+        const promptButtons = chatRoot.querySelectorAll(".ai-chat__prompt");
+
+        if (!form || !input || !messages || !status) return;
+
+        const staticReply =
+          "Respuesta estatica de demo: esta vista es solo visual y no consulta ningun servicio de IA.";
+
+        const autoResize = () => {
+          input.style.height = "auto";
+          input.style.height = Math.min(input.scrollHeight, 170) + "px";
+        };
+
+        const addMessage = (role, text) => {
+          const item = document.createElement("article");
+          item.className = "ai-chat__message ai-chat__message--" + role;
+
+          const avatar = document.createElement("div");
+          avatar.className = "ai-chat__avatar";
+          avatar.setAttribute("aria-hidden", "true");
+          avatar.textContent = role === "assistant" ? "AI" : "Tu";
+
+          const bubble = document.createElement("p");
+          bubble.className = "ai-chat__bubble";
+          bubble.textContent = text;
+
+          item.append(avatar, bubble);
+          messages.appendChild(item);
+          messages.scrollTop = messages.scrollHeight;
+        };
+
+        form.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const text = input.value.trim();
+          if (!text) {
+            status.textContent = "Escribe un mensaje para mostrarlo en el chat.";
+            return;
+          }
+
+          addMessage("user", text);
+          addMessage("assistant", staticReply);
+          input.value = "";
+          input.focus();
+          status.textContent = "Mensaje agregado con respuesta estatica.";
+        });
+
+        input.addEventListener("input", autoResize);
+
+        input.addEventListener("keydown", (event) => {
+          if (event.key !== "Enter" || event.shiftKey) return;
+          event.preventDefault();
+          form.requestSubmit();
+        });
+
+        promptButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            const prompt = button.getAttribute("data-prompt");
+            if (!prompt) return;
+            input.value = prompt;
+            autoResize();
+            input.focus();
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>

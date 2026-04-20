@@ -117,3 +117,10 @@ http://127.0.0.1:5000
 ## Estado actual
 
 Proyecto enfocado en la **homepage institucional** con UI moderna, responsive y animaciones de navegación.
+
+## Vista de chat
+
+La vista del asistente ahora es **solo visual** (sin lógica de conversación activa).
+
+- Ruta directa: `http://127.0.0.1:5000/chat`
+- Alias con redirección: `http://127.0.0.1:5000/ai` (también `/AI`)
