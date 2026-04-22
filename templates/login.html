@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciar Sesión - Edunexo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
+  </head>
+  <body>
+    <div class="auth-page">
+      <div class="auth-card">
+
+        <div class="auth-header">
+          <h1 class="auth-title">Bienvenido de nuevo</h1>
+          <p class="auth-subtitle">Ingresa tus credenciales para continuar</p>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="flash-message flash-message--{{ category }}" role="alert">
+                {% if category == 'error' %}
+                  <i class="ph-fill ph-warning-circle" aria-hidden="true" focusable="false"></i>
+                {% else %}
+                  <i class="ph-fill ph-check-circle" aria-hidden="true" focusable="false"></i>
+                {% endif %}
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form class="auth-form" id="loginForm" method="POST" action="/login" novalidate>
+          <!-- Fix #1: Remove duplicate label icons, keep only inside input -->
+          <div class="form-group">
+            <label class="form-label" for="email">Correo electrónico</label>
+            <div class="input-wrapper">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-input"
+                placeholder="tu@email.com"
+                required
+                aria-required="true"
+                autocomplete="email"
+                aria-describedby="emailError"
+              />
+              <!-- Fix #8: aria-hidden on decorative icons -->
+              <i class="ph ph-envelope input-icon" aria-hidden="true" focusable="false"></i>
+            </div>
+            <!-- Fix #12: role="alert" for error messages -->
+            <span class="form-error" id="emailError" role="alert" aria-live="polite"></span>
+          </div>
+
+          <div class="form-group">
+            <div class="label-row">
+              <label class="form-label" for="password">Contraseña</label>
+              <!-- Fix #5: Forgot password link -->
+              <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+            </div>
+            <div class="input-wrapper">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-input"
+                placeholder="Ingresa tu contraseña"
+                required
+                aria-required="true"
+                autocomplete="current-password"
+                aria-describedby="passwordError"
+              />
+              <i class="ph ph-lock-key input-icon" aria-hidden="true" focusable="false"></i>
+            </div>
+            <span class="form-error" id="passwordError" role="alert" aria-live="polite"></span>
+          </div>
+
+          <!-- Fix #6: Remember me checkbox -->
+          <div class="form-group checkbox-group">
+            <label class="checkbox-label" for="remember">
+              <input
+                type="checkbox"
+                id="remember"
+                name="remember"
+                class="checkbox-input"
+              />
+              <span class="checkbox-custom"></span>
+              <span class="checkbox-text">Recordarme</span>
+            </label>
+          </div>
+
+          <!-- Fix #7: Interactive button states with loading -->
+          <button type="submit" class="btn btn--primary" id="submitBtn">
+            <i class="ph-fill ph-sign-in" aria-hidden="true" focusable="false"></i>
+            <span class="btn-text">Iniciar Sesión</span>
+            <span class="btn-loader" aria-hidden="true" focusable="false">
+              <i class="ph ph-spinner"></i>
+            </span>
+          </button>
+        </form>
+
+        <!-- Fix #4: Remove HR divider, use margin instead -->
+        <div class="auth-footer">
+          <p class="auth-link">
+            ¿No tienes una cuenta? <a href="/register">Regístrate aquí</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+  </body>
+</html>

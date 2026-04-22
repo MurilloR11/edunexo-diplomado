@@ -1,9 +1,13 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for, session, flash
 from gpt4all import GPT4All
+import secrets
 
 app = Flask(__name__)
+app.secret_key = secrets.token_hex(32)
 
 _model = None
+
+users_db = {}
 
 SYSTEM_PROMPT = (
     "Eres un asistente virtual de la plataforma educativa Edunexo. "
@@ -29,6 +33,17 @@ def generate_response(message, max_tokens=256):
 @app.route("/")
 def index():
     return render_template("index.html")
+
+
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+
+@app.route("/register")
+def register():
+    return render_template("register.html")
+
 
 
 @app.route("/AI")

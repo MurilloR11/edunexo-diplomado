@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrarse - Edunexo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}" />
+  </head>
+  <body>
+    <div class="auth-page">
+      <div class="auth-card">
+
+        <div class="auth-header">
+          <h1 class="auth-title">Crear Cuenta</h1>
+          <p class="auth-subtitle">Completa tus datos para comenzar</p>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="flash-message flash-message--{{ category }}" role="alert">
+                {% if category == 'error' %}
+                  <i class="ph-fill ph-warning-circle" aria-hidden="true" focusable="false"></i>
+                {% else %}
+                  <i class="ph-fill ph-check-circle" aria-hidden="true" focusable="false"></i>
+                {% endif %}
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form class="auth-form" id="registerForm" method="POST" action="/register" novalidate>
+          <!-- Fix #1: Remove duplicate label icons -->
+          <div class="form-group">
+            <label class="form-label" for="fullName">Nombre Completo<span aria-hidden="true" class="required-mark">*</span></label><!-- Fix #9: Required indicator -->
+            <div class="input-wrapper">
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                class="form-input"
+                placeholder="Ingresa tu nombre completo"
+                required
+                aria-required="true"
+                autocomplete="name"
+                aria-describedby="fullNameError"
+              />
+              <i class="ph ph-user input-icon" aria-hidden="true" focusable="false"></i>
+            </div>
+            <span class="form-error" id="fullNameError" role="alert" aria-live="polite"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Correo electrónico<span aria-hidden="true" class="required-mark">*</span></label><!-- Fix #9: Required indicator -->
+            <div class="input-wrapper">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-input"
+                placeholder="tu@email.com"
+                required
+                aria-required="true"
+                autocomplete="email"
+                aria-describedby="emailError"
+              />
+              <i class="ph ph-envelope input-icon" aria-hidden="true" focusable="false"></i>
+            </div>
+            <span class="form-error" id="emailError" role="alert" aria-live="polite"></span>
+          </div>
+
+          <div class="form-row password-row"><!-- Fix #1: Equal 50/50 flex layout -->
+            <div class="form-group">
+              <label class="form-label" for="password">Contraseña<span aria-hidden="true" class="required-mark">*</span></label>
+              <div class="input-wrapper">
+                <span class="input-icon-wrap"><i class="ph ph-lock-key" aria-hidden="true" focusable="false"></i></span>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="form-input"
+                  placeholder="Mínimo 8 caracteres"
+                  required
+                  aria-required="true"
+                  minlength="8"
+                  autocomplete="new-password"
+                  aria-describedby="passwordError"
+                />
+                <button type="button" class="password-toggle-btn" data-target="password" onclick="togglePassword('password', this)"><i class="ph ph-eye-off input-icon" aria-hidden="true" focusable="false"></i></button>
+              </div>
+              <div class="password-strength">
+                <div class="password-strength-bar">
+                  <div class="password-strength-fill"></div>
+                </div>
+                <span class="password-strength-text"></span>
+              </div>
+              <span class="form-error" id="passwordError" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="confirmPassword">Confirmar Contraseña<span aria-hidden="true" class="required-mark">*</span></label>
+              <div class="input-wrapper">
+                <span class="input-icon-wrap"><i class="ph ph-lock-key" aria-hidden="true" focusable="false"></i></span>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  class="form-input"
+                  placeholder="Confirma tu contraseña"
+                  required
+                  aria-required="true"
+                  autocomplete="new-password"
+                  aria-describedby="confirmPasswordError"
+                />
+                <button type="button" class="password-toggle-btn" data-target="confirmPassword" onclick="togglePassword('confirmPassword', this)"><i class="ph ph-eye-off input-icon" aria-hidden="true" focusable="false"></i></button>
+              </div>
+              <span class="form-error" id="confirmPasswordError" role="alert" aria-live="polite"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="role">Rol<span aria-hidden="true" class="required-mark">*</span></label><!-- Fix #9: Required indicator -->
+            <div class="input-wrapper">
+              <select
+                id="role"
+                name="role"
+                class="form-select"
+                required
+                aria-required="true"
+                aria-describedby="roleError"
+              >
+                <option value="" disabled selected>Selecciona tu rol</option>
+                <option value="DOCENTE">DOCENTE - Personal docente</option>
+                <option value="ESTUDIANTE">ESTUDIANTE - Estudiante</option>
+                <option value="ADMINISTRADOR">ADMINISTRADOR - Personal administrativo</option>
+              </select>
+              <i class="ph ph-user-cog input-icon" aria-hidden="true" focusable="false"></i><!-- Fix #4: User role icon -->
+            </div>
+            <span class="form-error" id="roleError" role="alert" aria-live="polite"></span>
+          </div>
+
+          <!-- Fix #7: Interactive button states with loading -->
+          <button type="submit" class="btn btn--primary" id="submitBtn">
+            <i class="ph-fill ph-user-plus" aria-hidden="true" focusable="false"></i>
+            <span class="btn-text">Crear Cuenta</span>
+            <span class="btn-loader" aria-hidden="true" focusable="false">
+              <i class="ph ph-spinner"></i>
+            </span>
+          </button>
+        </form>
+
+        <!-- Fix #4: Remove HR divider -->
+        <div class="auth-footer">
+          <p class="auth-link">
+            ¿Ya tienes una cuenta? <a href="/login">Inicia sesión aquí</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/register.js') }}"></script>
+    <script>
+      function togglePassword(inputId, btn) {
+        var input = document.getElementById(inputId);
+        var icon = btn.querySelector('i');
+        if (input.type === 'password') {
+          input.type = 'text';
+          icon.classList.remove('ph-eye-off');
+          icon.classList.add('ph-eye');
+        } else {
+          input.type = 'password';
+          icon.classList.remove('ph-eye');
+          icon.classList.add('ph-eye-off');
+        }
+      }
+    </script>
+  </body>
+</html>
