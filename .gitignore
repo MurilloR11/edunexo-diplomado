@@ -1,5 +1,7 @@
 # Archivos de Claude Code
 .claude/
+.codex/
+AGENTS.md
 CLAUDE.md
 
 # Entorno virtual
@@ -9,6 +11,7 @@ venv/
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyc
 
 # Archivos de entorno
 .env
@@ -16,3 +19,8 @@ __pycache__/
 
 # Metadatos locales de VS Code
 .vscode/
+
+# Archivos de IDE / editor
+*.swp
+*.swo
+*~

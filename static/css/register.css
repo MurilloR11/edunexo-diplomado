@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @import url('https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.0.3/src/regular/style.css');
-@import url('https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.0.3/src/filled/style.css');
+@import url('https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.0.3/src/fill/style.css');
 
 :root {
   --color-bg-primary: #0f172a;
@@ -459,9 +459,12 @@ body {
 
 .password-toggle-btn i {
   font-size: 18px;
+  color: currentColor;
+  display: block;
 }
 
-.password-toggle-btn:hover {
+.password-toggle-btn:hover,
+.password-toggle-btn:focus-visible {
   color: var(--color-brand) !important;
 }
 

@@ -87,7 +87,7 @@
                   autocomplete="new-password"
                   aria-describedby="passwordError"
                 />
-                <button type="button" class="password-toggle-btn" data-target="password" onclick="togglePassword('password', this)"><i class="ph ph-eye-off input-icon" aria-hidden="true" focusable="false"></i></button>
+                <button type="button" class="password-toggle-btn" data-target="password" onclick="togglePassword('password', this)"><i class="ph ph-eye-slash input-icon" aria-hidden="true" focusable="false"></i></button>
               </div>
               <div class="password-strength">
                 <div class="password-strength-bar">
@@ -113,7 +113,7 @@
                   autocomplete="new-password"
                   aria-describedby="confirmPasswordError"
                 />
-                <button type="button" class="password-toggle-btn" data-target="confirmPassword" onclick="togglePassword('confirmPassword', this)"><i class="ph ph-eye-off input-icon" aria-hidden="true" focusable="false"></i></button>
+                <button type="button" class="password-toggle-btn" data-target="confirmPassword" onclick="togglePassword('confirmPassword', this)"><i class="ph ph-eye-slash input-icon" aria-hidden="true" focusable="false"></i></button>
               </div>
               <span class="form-error" id="confirmPasswordError" role="alert" aria-live="polite"></span>
             </div>
@@ -135,7 +135,7 @@
                 <option value="ESTUDIANTE">ESTUDIANTE - Estudiante</option>
                 <option value="ADMINISTRADOR">ADMINISTRADOR - Personal administrativo</option>
               </select>
-              <i class="ph ph-user-cog input-icon" aria-hidden="true" focusable="false"></i><!-- Fix #4: User role icon -->
+              <i class="ph ph-user-gear input-icon" aria-hidden="true" focusable="false"></i><!-- Fix #4: User role icon -->
             </div>
             <span class="form-error" id="roleError" role="alert" aria-live="polite"></span>
           </div>
@@ -166,12 +166,12 @@
         var icon = btn.querySelector('i');
         if (input.type === 'password') {
           input.type = 'text';
-          icon.classList.remove('ph-eye-off');
+          icon.classList.remove('ph-eye-slash');
           icon.classList.add('ph-eye');
         } else {
           input.type = 'password';
           icon.classList.remove('ph-eye');
-          icon.classList.add('ph-eye-off');
+          icon.classList.add('ph-eye-slash');
         }
       }
     </script>

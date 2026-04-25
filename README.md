@@ -1,142 +1,146 @@
 # Edunexo - Landing + Asistente IA
 
-Aplicación web desarrollada con **Flask** para presentar la plataforma académica **Edunexo** e integrar un **chat con GPT4All**.  
-El sitio comunica propuesta de valor, misión/visión, objetivos y stack tecnológico, y además incluye una vista de asistencia IA con respuestas en tiempo real.
+Aplicación web desarrollada con **Flask** para presentar la plataforma académica **Edunexo**, gestionar autenticación básica de usuarios y ofrecer un chat local con **GPT4All**.
 
 ## ¿Qué trata el proyecto?
 
-Edunexo es una propuesta de plataforma para gestión educativa que conecta:
-
-- Docentes
-- Estudiantes
-- Acudientes
-- Administradores
-
-La solución está orientada a mostrar el producto, su impacto, su enfoque tecnológico y brindar soporte conversacional con IA local.
+Edunexo es una propuesta de plataforma para gestión educativa orientada a docentes, estudiantes, acudientes y administradores. El proyecto incluye landing institucional, formularios de registro e inicio de sesión, dashboard temporal y asistente IA con respuestas en español.
 
 ## Tecnologías y librerías
 
-- **Python + Flask** (servidor web y render de plantilla)
-- **GPT4All** (asistente IA local con modelo Llama 3)
-- **HTML5 + CSS3**
-- **JavaScript vanilla** (sin frameworks)
-- **Google Fonts**:
-  - Montserrat
-  - Roboto
-  - Syne
+- **Python + Flask**: servidor web, rutas y render de plantillas.
+- **Flask-SQLAlchemy**: modelos y conexión a MySQL.
+- **Flask-Migrate / Alembic**: migraciones de base de datos.
+- **PyMySQL**: driver para conectar Flask con MySQL.
+- **Werkzeug**: hash y validación de contraseñas.
+- **GPT4All**: asistente IA local con modelo Llama 3.
+- **HTML5, CSS3 y JavaScript vanilla**.
+- **Phosphor Icons, Google Fonts y Devicon** desde CDN.
 
 ## Componentes principales
 
-1. **Header/Navbar**
-   - Logo clickeable al inicio
-   - Navegación por anclas
-   - CTA "Registrate"
-   - Menú hamburguesa en móvil
-
-2. **Hero**
-   - Título y subtítulo principal
-   - CTAs
-   - Métricas destacadas (contador animado)
-   - Visual con cards flotantes (en desktop/tablet)
-
-3. **Sección Nosotros**
-   - Presentación de la propuesta
-   - Cards de funcionalidades clave
-
-4. **Misión y Visión**
-   - 2 cards principales con puntos estratégicos
-
-5. **Objetivos**
-   - Objetivo general
-   - Objetivos específicos en cards
-
-6. **Tecnologías**
-   - Card unificada con tecnologías y lenguajes
-   - Logos de stack (Devicon SVG)
-
-7. **Asistente IA**
-   - Vista de chat en `/chat`, `/ai` y `/AI`
-   - Integración frontend con `POST /api/chat`
-   - Respuesta generada con GPT4All (modelo Llama 3)
-
-8. **Footer**
-   - Marca
-   - Redes sociales
-   - Enlaces de navegación/roles/legal
-
-## Animaciones e interacciones
-
-- Animaciones al hacer scroll entre secciones (IntersectionObserver)
-- Contador animado en los números del hero
-- Respeto por accesibilidad con `prefers-reduced-motion`
-- Menú móvil con apertura/cierre y comportamiento adaptable al resize
-
-## Diseño responsivo
-
-Se aplican breakpoints para adaptar layout en distintos dispositivos:
-
-- `1200px`
-- `1024px`
-- `900px`
-- `600px`
-
-En móvil se simplifica la experiencia visual para evitar saturación (por ejemplo, ocultando ciertos bloques de imagen en pantallas pequeñas).
-
-## Origen de imágenes y recursos visuales
-
-- **Logo**: archivo local `static/adunexo.logo.svg`
-- **Imágenes de contenido**: URLs remotas de **Unsplash** (`images.unsplash.com`)
-- **Iconos generales**: SVG inline dentro de la plantilla
-- **Logos de tecnologías/lenguajes**: SVG remotos de **Devicon** (CDN jsdelivr)
+1. **Landing page**: vista principal en `/` con secciones institucionales, stack tecnológico y CTAs.
+2. **Autenticación**: registro en `/register`, inicio de sesión en `/login` y cierre en `/logout`.
+3. **Dashboard temporal**: vista protegida en `/dashboard`, con sidebar, perfil, navegación y resumen visual.
+4. **Asistente IA**: vistas `/chat`, `/ai` y `/AI`, con endpoint `POST /api/chat`.
+5. **Base de datos**: tabla `users` gestionada por migraciones en MySQL.
 
 ## Estructura del proyecto
 
 ```text
 edunexo-diplomado/
 ├── app.py
+├── config.py
+├── extensions.py
 ├── requirements.txt
+├── models/
+│   ├── __init__.py
+│   └── user.py
+├── migrations/
+│   ├── alembic.ini
+│   ├── env.py
+│   └── versions/
+│       └── 001_create_users.py
 ├── templates/
 │   ├── index.html
-│   └── chat.html
+│   ├── chat.html
+│   ├── login.html
+│   ├── register.html
+│   └── dashboard.html
 ├── static/
 │   ├── index.css
-│   ├── css/chat.css
-│   └── adunexo.logo.svg
+│   ├── adunexo.logo.svg
+│   ├── css/
+│   │   ├── chat.css
+│   │   ├── login.css
+│   │   ├── register.css
+│   │   └── dashboard.css
+│   └── js/
 └── .gitignore
 ```
 
+## Configuración
+
+La configuración principal está en `config.py`.
+
+```python
+SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root@localhost/edunexo"
+```
+
+Puedes sobrescribirla con variables de entorno:
+
+```bash
+export DATABASE_URL="mysql+pymysql://usuario:clave@localhost/edunexo"
+export SECRET_KEY="clave-segura-para-sesiones"
+```
+
+El proyecto está planteado para **MySQL**, no SQLite.
+
 ## Cómo ejecutar el proyecto
 
-1. Crear y activar entorno virtual (opcional pero recomendado).
+1. Crear y activar entorno virtual:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
 2. Instalar dependencias:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Ejecutar la app:
+3. Crear la base de datos MySQL si aún no existe:
 
 ```bash
-python app.py
+mysql -u root -e "CREATE DATABASE IF NOT EXISTS edunexo CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 ```
 
-4. Abrir en navegador:
+4. Aplicar migraciones:
+
+```bash
+flask --app app.py db upgrade
+```
+
+5. Ejecutar la app:
+
+```bash
+python3 app.py
+```
+
+6. Abrir en el navegador:
 
 ```text
 http://127.0.0.1:5000
 ```
+
+## Migraciones
+
+Las migraciones ya están inicializadas en `migrations/`. No ejecutes `flask db init` otra vez.
+
+```bash
+flask --app app.py db migrate -m "descripcion del cambio"
+flask --app app.py db upgrade
+flask --app app.py db downgrade
+flask --app app.py db current
+flask --app app.py db history
+```
+
+## Autenticación
+
+El modelo `User` está en `models/user.py` y usa la tabla `users`. Las contraseñas se guardan como hash con Werkzeug. Si un usuario ya inició sesión, `/login` y `/register` redirigen a `/dashboard`. Si no hay sesión activa, `/dashboard` redirige a `/login`.
 
 ## Asistente IA
 
 Chat conectado a GPT4All con modelo **Meta-Llama-3-8B-Instruct.Q4_0.gguf**.
 
 - Ruta directa: `http://127.0.0.1:5000/chat`
-- Alias: `http://127.0.0.1:5000/ai` (también `/AI`)
+- Alias: `http://127.0.0.1:5000/ai` y `/AI`
 - Endpoint API: `POST /api/chat`
-- Prompt de sistema: respuestas en español, breves y enfocadas en contexto educativo
-- Longitud máxima de entrada en UI: `500` caracteres
+- Prompt de sistema: respuestas breves, en español y enfocadas en contexto educativo.
 
-Ejemplo de consumo del endpoint:
+Ejemplo:
 
 ```bash
 curl -X POST http://127.0.0.1:5000/api/chat \
@@ -146,4 +150,4 @@ curl -X POST http://127.0.0.1:5000/api/chat \
 
 ## Estado actual
 
-Landing institucional moderna + módulo de chat IA funcional con GPT4All para asistencia local en tiempo real.
+Landing institucional, autenticación con MySQL, dashboard temporal protegido y asistente IA local con GPT4All.
