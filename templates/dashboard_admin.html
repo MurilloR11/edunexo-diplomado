@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel Administrativo — Edunexo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard_admin.css') }}" />
+  </head>
+  <body>
+    <div class="dashboard-shell">
+
+      <!-- ── Sidebar ──────────────────────────────────── -->
+      <aside class="sidebar" aria-label="Navegacion principal">
+        <a class="sidebar__brand" href="{{ url_for('dashboard_admin') }}" aria-label="Edunexo inicio">
+          <img src="{{ url_for('static', filename='adunexo.logo.svg') }}" alt="Edunexo" class="sidebar__logo" />
+          <span class="sidebar__brand-text">Edunexo</span>
+        </a>
+
+        <nav class="sidebar__nav">
+          <p class="sidebar__section">Gestion</p>
+          <a class="sidebar__link sidebar__link--active" href="{{ url_for('dashboard_admin') }}" aria-current="page">
+            <i class="ph ph-squares-four" aria-hidden="true"></i>
+            <span>Panel general</span>
+          </a>
+          <a class="sidebar__link" href="#">
+            <i class="ph ph-users" aria-hidden="true"></i>
+            <span>Usuarios</span>
+          </a>
+          <a class="sidebar__link" href="#">
+            <i class="ph ph-chalkboard-teacher" aria-hidden="true"></i>
+            <span>Docentes</span>
+          </a>
+          <a class="sidebar__link" href="#">
+            <i class="ph ph-graduation-cap" aria-hidden="true"></i>
+            <span>Estudiantes</span>
+          </a>
+
+          <p class="sidebar__section">Herramientas</p>
+          <a class="sidebar__link" href="#">
+            <i class="ph ph-calendar-check" aria-hidden="true"></i>
+            <span>Asistencia</span>
+          </a>
+          <a class="sidebar__link" href="#">
+            <i class="ph ph-chart-line" aria-hidden="true"></i>
+            <span>Reportes</span>
+          </a>
+          <a class="sidebar__link" href="#">
+            <i class="ph ph-gear-six" aria-hidden="true"></i>
+            <span>Configuracion</span>
+          </a>
+        </nav>
+
+        <div class="sidebar__profile">
+          <div class="profile">
+            <i class="ph-fill ph-user-circle profile__icon" aria-hidden="true"></i>
+            <div class="profile__body">
+              <strong>{{ user_name }}</strong>
+              <span>Personal Administrativo</span>
+            </div>
+          </div>
+          <a class="logout-link" href="{{ url_for('logout') }}">
+            <i class="ph ph-sign-out" aria-hidden="true"></i>
+            <span>Cerrar sesion</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- ── Main ─────────────────────────────────────── -->
+      <main class="dashboard-main">
+
+        <!-- Topbar -->
+        <header class="topbar">
+          <div>
+            <p class="topbar__eyebrow">Panel de Administracion</p>
+            <h1>Bienvenido, {{ user_name }}</h1>
+          </div>
+          <div class="topbar__actions">
+            <div class="system-badge" aria-label="Estado del sistema: operativo">
+              <span class="system-badge__dot"></span>
+              <span>Sistema operativo</span>
+            </div>
+            <a class="topbar__cta" href="#">
+              <i class="ph ph-user-plus" aria-hidden="true"></i>
+              <span>Nuevo registro</span>
+            </a>
+            <a class="icon-button" href="{{ url_for('index') }}" aria-label="Ir al inicio">
+              <i class="ph ph-house" aria-hidden="true"></i>
+            </a>
+            <button class="icon-button" type="button" aria-label="Notificaciones">
+              <i class="ph ph-bell" aria-hidden="true"></i>
+            </button>
+          </div>
+        </header>
+
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div class="flash-list">
+              {% for category, message in messages %}
+                <div class="flash flash--{{ category }}" role="alert">
+                  <i class="ph ph-info" aria-hidden="true"></i>
+                  <span>{{ message }}</span>
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <!-- KPI Row -->
+        <section class="stats-grid" aria-label="Indicadores clave">
+          <article class="stat-card">
+            <span class="stat-card__icon"><i class="ph ph-users" aria-hidden="true"></i></span>
+            <div>
+              <p>Usuarios activos</p>
+              <strong>128</strong>
+              <div class="stat-card__meta">
+                <span class="trend-badge trend-badge--up">
+                  <i class="ph ph-trend-up" aria-hidden="true"></i> +4
+                </span>
+                <span class="trend-sublabel">esta semana</span>
+              </div>
+            </div>
+          </article>
+          <article class="stat-card">
+            <span class="stat-card__icon"><i class="ph ph-book-open" aria-hidden="true"></i></span>
+            <div>
+              <p>Cursos activos</p>
+              <strong>18</strong>
+              <div class="stat-card__meta">
+                <span class="trend-badge trend-badge--up">
+                  <i class="ph ph-trend-up" aria-hidden="true"></i> +2
+                </span>
+                <span class="trend-sublabel">este mes</span>
+              </div>
+            </div>
+          </article>
+          <article class="stat-card">
+            <span class="stat-card__icon"><i class="ph ph-chalkboard-teacher" aria-hidden="true"></i></span>
+            <div>
+              <p>Docentes activos</p>
+              <strong>12</strong>
+              <div class="stat-card__meta">
+                <span class="trend-badge trend-badge--neutral">Sin cambios</span>
+              </div>
+            </div>
+          </article>
+          <article class="stat-card">
+            <span class="stat-card__icon"><i class="ph ph-check-circle" aria-hidden="true"></i></span>
+            <div>
+              <p>Asistencia general</p>
+              <strong>94%</strong>
+              <div class="stat-card__meta">
+                <span class="trend-badge trend-badge--up">
+                  <i class="ph ph-trend-up" aria-hidden="true"></i> +2 pts
+                </span>
+                <span class="trend-sublabel">vs semana ant.</span>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <!-- Middle row: table + system status -->
+        <div class="admin-grid">
+
+          <!-- Recent registrations table -->
+          <div class="panel">
+            <div class="panel__header">
+              <div>
+                <p class="panel__label">Usuarios</p>
+                <h2>Ultimos registros</h2>
+              </div>
+              <a class="panel__footer-link" href="#" style="margin-bottom: 6px;">
+                Ver todos <i class="ph ph-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+            <div class="data-table-wrapper">
+              <table class="data-table" aria-label="Ultimos usuarios registrados">
+                <thead>
+                  <tr>
+                    <th>Usuario</th>
+                    <th>Rol</th>
+                    <th class="hide-mobile">Fecha de registro</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div class="user-avatar" aria-hidden="true">MR</div>
+                        <div>
+                          <span class="user-cell__name">María Rodríguez</span>
+                          <span class="user-cell__email">m.rodriguez@edunexo.edu</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="badge badge--admin">Administrador</span></td>
+                    <td class="hide-mobile">28 Abr 2026</td>
+                    <td><span class="badge badge--active">Activo</span></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div class="user-avatar" aria-hidden="true">CH</div>
+                        <div>
+                          <span class="user-cell__name">Carlos Herrera</span>
+                          <span class="user-cell__email">c.herrera@edunexo.edu</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="badge badge--docente">Docente</span></td>
+                    <td class="hide-mobile">26 Abr 2026</td>
+                    <td><span class="badge badge--active">Activo</span></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div class="user-avatar" aria-hidden="true">AM</div>
+                        <div>
+                          <span class="user-cell__name">Ana Martínez</span>
+                          <span class="user-cell__email">a.martinez@edunexo.edu</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="badge badge--estudiante">Estudiante</span></td>
+                    <td class="hide-mobile">25 Abr 2026</td>
+                    <td><span class="badge badge--active">Activo</span></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div class="user-avatar" aria-hidden="true">LP</div>
+                        <div>
+                          <span class="user-cell__name">Luis Pérez</span>
+                          <span class="user-cell__email">l.perez@edunexo.edu</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="badge badge--docente">Docente</span></td>
+                    <td class="hide-mobile">24 Abr 2026</td>
+                    <td><span class="badge badge--active">Activo</span></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div class="user-avatar" aria-hidden="true">SG</div>
+                        <div>
+                          <span class="user-cell__name">Sofía García</span>
+                          <span class="user-cell__email">s.garcia@edunexo.edu</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="badge badge--estudiante">Estudiante</span></td>
+                    <td class="hide-mobile">22 Abr 2026</td>
+                    <td><span class="badge badge--active">Activo</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Aside: system status -->
+          <div class="admin-grid__aside">
+            <div class="panel">
+              <div class="panel__header">
+                <div>
+                  <p class="panel__label">Infraestructura</p>
+                  <h2>Estado del sistema</h2>
+                </div>
+              </div>
+              <ul class="status-list" aria-label="Estado de los modulos">
+                <li class="status-item">
+                  <span class="status-dot status-dot--ok" aria-label="Operativo"></span>
+                  <span class="status-item__label">Autenticacion</span>
+                  <span class="status-item__state status-item__state--ok">Operativo</span>
+                </li>
+                <li class="status-item">
+                  <span class="status-dot status-dot--ok" aria-label="Operativo"></span>
+                  <span class="status-item__label">Base de datos</span>
+                  <span class="status-item__state status-item__state--ok">Operativo</span>
+                </li>
+                <li class="status-item">
+                  <span class="status-dot status-dot--ok" aria-label="Operativo"></span>
+                  <span class="status-item__label">Asistente IA</span>
+                  <span class="status-item__state status-item__state--ok">Operativo</span>
+                </li>
+                <li class="status-item">
+                  <span class="status-dot status-dot--warn" aria-label="En desarrollo"></span>
+                  <span class="status-item__label">Modulo de cursos</span>
+                  <span class="status-item__state status-item__state--warn">En desarrollo</span>
+                </li>
+                <li class="status-item">
+                  <span class="status-dot status-dot--warn" aria-label="En desarrollo"></span>
+                  <span class="status-item__label">Generador de reportes</span>
+                  <span class="status-item__state status-item__state--warn">En desarrollo</span>
+                </li>
+              </ul>
+              <div class="panel__footer">
+                <span>Verificado hace 2 min</span>
+                <a class="panel__footer-link" href="#">Actualizar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom row: shortcuts + activity -->
+        <div class="content-grid">
+
+          <!-- Quick access shortcuts -->
+          <div class="panel">
+            <div class="panel__header">
+              <div>
+                <p class="panel__label">Accesos rapidos</p>
+                <h2>Operaciones principales</h2>
+              </div>
+            </div>
+            <ul class="shortcut-list" aria-label="Acciones rapidas">
+              <li>
+                <a class="shortcut-item" href="#">
+                  <span class="shortcut-item__icon"><i class="ph ph-user-plus" aria-hidden="true"></i></span>
+                  <span class="shortcut-item__body">
+                    <span class="shortcut-item__label">Registrar usuario</span>
+                    <span class="shortcut-item__desc">Agregar docentes, estudiantes o administrativos</span>
+                  </span>
+                  <i class="ph ph-arrow-right shortcut-item__arrow" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li>
+                <a class="shortcut-item" href="#">
+                  <span class="shortcut-item__icon"><i class="ph ph-books" aria-hidden="true"></i></span>
+                  <span class="shortcut-item__body">
+                    <span class="shortcut-item__label">Gestionar cursos</span>
+                    <span class="shortcut-item__desc">Crear y asignar cursos del periodo académico</span>
+                  </span>
+                  <i class="ph ph-arrow-right shortcut-item__arrow" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li>
+                <a class="shortcut-item" href="#">
+                  <span class="shortcut-item__icon"><i class="ph ph-chart-line" aria-hidden="true"></i></span>
+                  <span class="shortcut-item__body">
+                    <span class="shortcut-item__label">Ver reportes</span>
+                    <span class="shortcut-item__desc">Estadísticas de asistencia y rendimiento</span>
+                  </span>
+                  <i class="ph ph-arrow-right shortcut-item__arrow" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li>
+                <a class="shortcut-item" href="{{ url_for('chat_view') }}">
+                  <span class="shortcut-item__icon"><i class="ph ph-sparkle" aria-hidden="true"></i></span>
+                  <span class="shortcut-item__body">
+                    <span class="shortcut-item__label">Abrir asistente IA</span>
+                    <span class="shortcut-item__desc">Consultas con soporte de inteligencia artificial</span>
+                  </span>
+                  <i class="ph ph-arrow-right shortcut-item__arrow" aria-hidden="true"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Activity feed -->
+          <div class="panel">
+            <div class="panel__header">
+              <div>
+                <p class="panel__label">Registro</p>
+                <h2>Actividad reciente</h2>
+              </div>
+            </div>
+            <ul class="activity-feed" aria-label="Actividad reciente del sistema">
+              <li class="activity-entry">
+                <span class="activity-entry__icon activity-entry__icon--user" aria-hidden="true">
+                  <i class="ph ph-sign-in"></i>
+                </span>
+                <div class="activity-entry__body">
+                  <span class="activity-entry__title">Inicio de sesion exitoso</span>
+                  <span class="activity-entry__desc">Accediste como Personal Administrativo.</span>
+                </div>
+                <span class="activity-entry__time">Ahora</span>
+              </li>
+              <li class="activity-entry">
+                <span class="activity-entry__icon activity-entry__icon--user" aria-hidden="true">
+                  <i class="ph ph-user-plus"></i>
+                </span>
+                <div class="activity-entry__body">
+                  <span class="activity-entry__title">Nuevo registro completado</span>
+                  <span class="activity-entry__desc">Carlos Herrera se registró como Docente.</span>
+                </div>
+                <span class="activity-entry__time">Hace 1 h</span>
+              </li>
+              <li class="activity-entry">
+                <span class="activity-entry__icon activity-entry__icon--system" aria-hidden="true">
+                  <i class="ph ph-database"></i>
+                </span>
+                <div class="activity-entry__body">
+                  <span class="activity-entry__title">Modulo de asistencia activo</span>
+                  <span class="activity-entry__desc">Registro de asistencia disponible para docentes.</span>
+                </div>
+                <span class="activity-entry__time">Hace 3 h</span>
+              </li>
+              <li class="activity-entry">
+                <span class="activity-entry__icon activity-entry__icon--alert" aria-hidden="true">
+                  <i class="ph ph-warning"></i>
+                </span>
+                <div class="activity-entry__body">
+                  <span class="activity-entry__title">Modulo de reportes pendiente</span>
+                  <span class="activity-entry__desc">El generador de reportes aun esta en desarrollo.</span>
+                </div>
+                <span class="activity-entry__time">Hace 1 d</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

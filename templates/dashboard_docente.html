@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel Docente - Edunexo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}" />
+  </head>
+  <body>
+    <div class="dashboard-shell">
+      <aside class="sidebar" aria-label="Navegacion principal">
+        <a class="sidebar__brand" href="{{ url_for('dashboard_docente') }}" aria-label="Dashboard Edunexo">
+          <img src="{{ url_for('static', filename='adunexo.logo.svg') }}" alt="Edunexo" class="sidebar__logo" />
+          <span class="sidebar__brand-text">Edunexo</span>
+        </a>
+
+        <nav class="sidebar__nav">
+          <p class="sidebar__section">Academico</p>
+          <a class="sidebar__link sidebar__link--active" href="{{ url_for('dashboard_docente') }}" aria-current="page">
+            <i class="ph ph-squares-four" aria-hidden="true"></i>
+            <span>Panel general</span>
+          </a>
+          <a class="sidebar__link" href="#">
+            <i class="ph ph-book-open" aria-hidden="true"></i>
+            <span>Mis cursos</span>
+          </a>
+          <a class="sidebar__link" href="#">
+            <i class="ph ph-graduation-cap" aria-hidden="true"></i>
+            <span>Mis estudiantes</span>
+          </a>
+          <a class="sidebar__link" href="#">
+            <i class="ph ph-calendar-check" aria-hidden="true"></i>
+            <span>Registro de asistencia</span>
+          </a>
+
+          <p class="sidebar__section">Herramientas</p>
+          <a class="sidebar__link" href="#">
+            <i class="ph ph-exam" aria-hidden="true"></i>
+            <span>Calificaciones</span>
+          </a>
+          <a class="sidebar__link" href="#">
+            <i class="ph ph-chart-line" aria-hidden="true"></i>
+            <span>Reportes</span>
+          </a>
+          <a class="sidebar__link" href="{{ url_for('chat_view') }}">
+            <i class="ph ph-sparkle" aria-hidden="true"></i>
+            <span>Asistente IA</span>
+          </a>
+        </nav>
+
+        <div class="sidebar__profile">
+          <div class="profile">
+            <i class="ph-fill ph-user-circle profile__icon" aria-hidden="true"></i>
+            <div class="profile__body">
+              <strong>{{ user_name }}</strong>
+              <span>Docente</span>
+            </div>
+          </div>
+          <a class="logout-link" href="{{ url_for('logout') }}">
+            <i class="ph ph-sign-out" aria-hidden="true"></i>
+            <span>Cerrar sesion</span>
+          </a>
+        </div>
+      </aside>
+
+      <main class="dashboard-main">
+        <header class="topbar">
+          <div>
+            <p class="topbar__eyebrow">Panel del Docente</p>
+            <h1>Bienvenido, {{ user_name }}</h1>
+          </div>
+          <div class="topbar__actions">
+            <a class="icon-button" href="{{ url_for('index') }}" aria-label="Ir al inicio">
+              <i class="ph ph-house" aria-hidden="true"></i>
+            </a>
+            <button class="icon-button" type="button" aria-label="Notificaciones">
+              <i class="ph ph-bell" aria-hidden="true"></i>
+            </button>
+          </div>
+        </header>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div class="flash-list">
+              {% for category, message in messages %}
+                <div class="flash flash--{{ category }}" role="alert">
+                  <i class="ph ph-info" aria-hidden="true"></i>
+                  <span>{{ message }}</span>
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <section class="stats-grid" aria-label="Resumen">
+          <article class="stat-card">
+            <span class="stat-card__icon"><i class="ph ph-book-open" aria-hidden="true"></i></span>
+            <div>
+              <p>Mis cursos</p>
+              <strong>3</strong>
+            </div>
+          </article>
+          <article class="stat-card">
+            <span class="stat-card__icon"><i class="ph ph-graduation-cap" aria-hidden="true"></i></span>
+            <div>
+              <p>Estudiantes asignados</p>
+              <strong>42</strong>
+            </div>
+          </article>
+          <article class="stat-card">
+            <span class="stat-card__icon"><i class="ph ph-check-circle" aria-hidden="true"></i></span>
+            <div>
+              <p>Asistencia del dia</p>
+              <strong>91%</strong>
+            </div>
+          </article>
+          <article class="stat-card">
+            <span class="stat-card__icon"><i class="ph ph-chat-circle-dots" aria-hidden="true"></i></span>
+            <div>
+              <p>Consultas IA</p>
+              <strong>8</strong>
+            </div>
+          </article>
+        </section>
+
+        <section class="content-grid">
+          <div class="panel">
+            <div class="panel__header">
+              <div>
+                <p class="panel__label">Accesos rapidos</p>
+                <h2>Operaciones del dia</h2>
+              </div>
+            </div>
+            <div class="quick-actions">
+              <a class="quick-action" href="#">
+                <i class="ph ph-calendar-check" aria-hidden="true"></i>
+                <span>Registrar asistencia</span>
+              </a>
+              <a class="quick-action" href="#">
+                <i class="ph ph-upload-simple" aria-hidden="true"></i>
+                <span>Subir material</span>
+              </a>
+              <a class="quick-action" href="{{ url_for('chat_view') }}">
+                <i class="ph ph-sparkle" aria-hidden="true"></i>
+                <span>Abrir asistente IA</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel__header">
+              <div>
+                <p class="panel__label">Estado</p>
+                <h2>Actividad reciente</h2>
+              </div>
+            </div>
+            <ul class="activity-list">
+              <li>
+                <span class="activity-list__dot"></span>
+                <div>
+                  <strong>Inicio de sesion correcto</strong>
+                  <p>Accediste al panel docente de Edunexo.</p>
+                </div>
+              </li>
+              <li>
+                <span class="activity-list__dot"></span>
+                <div>
+                  <strong>Cursos disponibles</strong>
+                  <p>Tienes 3 cursos activos asignados este periodo.</p>
+                </div>
+              </li>
+              <li>
+                <span class="activity-list__dot"></span>
+                <div>
+                  <strong>Asistencia pendiente</strong>
+                  <p>Recuerda registrar la asistencia de hoy.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

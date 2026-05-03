@@ -3,6 +3,7 @@ from gpt4all import GPT4All
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import check_password_hash, generate_password_hash
 from extensions import db, migrate
+from middleware import login_required, role_required, redirect_by_role
 
 app = Flask(__name__)
 app.config.from_object("config.Config")
@@ -52,7 +53,7 @@ def favicon():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if "user_id" in session:
-        return redirect(url_for("dashboard"))
+        return redirect_by_role()
 
     if request.method == "POST":
         email = request.form.get("email", "").strip().lower()
@@ -79,7 +80,7 @@ def login():
         session["user_role"] = user.role
         session.permanent = remember
         flash("Inicio de sesión exitoso.", "success")
-        return redirect(url_for("dashboard"))
+        return redirect_by_role()
 
     return render_template("login.html")
 
@@ -87,7 +88,7 @@ def login():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if "user_id" in session:
-        return redirect(url_for("dashboard"))
+        return redirect_by_role()
 
     if request.method == "POST":
         full_name = request.form.get("fullName", "").strip()
@@ -140,13 +141,39 @@ def register():
 
 
 @app.route("/dashboard")
+@login_required
 def dashboard():
-    if "user_id" not in session:
-        flash("Inicia sesión para acceder al dashboard.", "error")
-        return redirect(url_for("login"))
+    return redirect_by_role()
 
+
+@app.route("/dashboard/administrador")
+@login_required
+@role_required("ADMINISTRADOR")
+def dashboard_admin():
     return render_template(
-        "dashboard.html",
+        "dashboard_admin.html",
+        user_name=session.get("user_name"),
+        user_role=session.get("user_role"),
+    )
+
+
+@app.route("/dashboard/docente")
+@login_required
+@role_required("DOCENTE")
+def dashboard_docente():
+    return render_template(
+        "dashboard_docente.html",
+        user_name=session.get("user_name"),
+        user_role=session.get("user_role"),
+    )
+
+
+@app.route("/dashboard/estudiante")
+@login_required
+@role_required("ESTUDIANTE")
+def dashboard_estudiante():
+    return render_template(
+        "dashboard_estudiante.html",
         user_name=session.get("user_name"),
         user_role=session.get("user_role"),
     )
